@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row"><!--la filaaa -->
+<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!--columna izquierda-->
+<h1>Mamá</h1>
+<div class="card"><!--tarjeta-->
+  <div class="card-body">
+    <form action="/registrarMateria/" method="POST">{% csrf_token %}<!--formulario-->
+      <div class="form-group">
+        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" 
+        placeholder="Codigo Materia" minlength="5" maxlength="6" required> 
+      </div>
+      <div class="form-group py-3">
+        <input type="text" id="txtnombre" name="txtnombre" class="form-control" 
+        placeholder="Nombre Materia"  maxlength="100" required> 
+      </div>
+      <div class="form-group py-2">
+        <input type="text" id="numcreditos" name="numcreditos" class="form-control" 
+        value="1" min="1" max="9" required> 
+      </div>
+      <div class="form-group py-2">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form><!--formulario-->
+  </div>
+</div><!--tarjeta-->
+</div><!--columna izquierda-->
+<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!--columna derecha-->
+<h1>Listado de materias</h1>    
+<div class="table-responsive"><!--tabla responsiva-->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Creditos</th>
+            <th colspan="2">Creditos</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for m in mismaterias %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{m.codigo}}</td>
+                <td>{{m.nombre}}</td>
+                <td>{{m.creditos}}</td>
+                <td><a href="seleccionarMateria/{{m.codigo}}" class="btn btn-info">Editar</a></td>
+                <td><a href="borrarMateria/{{m.codigo}}" class="btn btn-danger">Borrar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</div><!--tabla responsiva-->
+</div><!--columna derecha-->
+</div><!-- a filaaa-->
+{% endblock %}
