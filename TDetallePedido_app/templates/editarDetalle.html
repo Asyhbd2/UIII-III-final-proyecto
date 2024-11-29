@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h1>Editar Detalle del Pedido</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="/editarDetallePedido/" method="POST">{% csrf_token %}
+          <div class="form-group">
+            <input type="number" id="numid" name="numid" class="form-control"
+              value="{{ losdetalles.detalleid }}" readonly required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" id="pedidoid" name="pedidoid" class="form-control"
+              value="{{ losdetalles.pedidoid.pedidoid }}" readonly required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" id="productoid" name="productoid" class="form-control"
+              value="{{ losdetalles.productoid.productoid }}" readonly required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" id="intcantidad" name="intcantidad" class="form-control"
+              value="{{ losdetalles.cantidad }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" step="0.01" id="decimalpreciounitario" name="decimalpreciounitario" class="form-control"
+              value="{{ losdetalles.preciounitario }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" step="0.01" id="decimalsubtotal" name="decimalsubtotal" class="form-control"
+              value="{{ losdetalles.subtotal }}" required>
+          </div>
+          <div class="form-group py-3">
+            <textarea id="txtnotas" name="txtnotas" class="form-control">{{ losdetalles.notas }}</textarea>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
